@@ -1,5 +1,5 @@
 from setuptools import setup, find_packages
 setup(
-    name = 'load_info_data',
+    name = 'data_analysis',
     packages = find_packages(),
 )
