@@ -24,7 +24,7 @@ import numpy as np
 import pandas as pd
 from load_info_data import load_info_data
 PATH=  r'..\lending_club_loan_two.csv'
-SAVE = True
+SAVE = False
 
 
 def fill_in_mort_acc(total_acc, mort_acc):
