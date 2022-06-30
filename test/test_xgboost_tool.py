@@ -18,7 +18,7 @@ class TestXgbTool(unittest.TestCase):
     def test_hyper_xgboost(self):
         data = pd.read_csv(PATH)
         #So that save is not in (0, 1), there is error
-        self.assertRaises(ValueError, hyper_xgboost, data = data, save = 5)
+        self.assertRaises(ValueError, hyper_xgboost, data = data, save = 6)
     
 if __name__ == "__main__":
     unittest.main()
