@@ -25,14 +25,14 @@ In this first module  of data analysis we analyze our dataset and make useful pl
 """
 import time
 import seaborn as sns
-import data_analysis
+from load_info_data import load_info_data
 from plot_image import *
 PATH =  r'..\lending_club_loan_two.csv'
 
 if __name__ == '__main__':
     #Import dataset and print it's info
     start = time.time()
-    data = data_analysis.load_info_data(PATH)
+    data = load_info_data(PATH)
     #Visualizing loan payoff and chargeoff
     countpl(column = 'loan_status' , data = data,  save = 0, name = '(1)pf_vs_co.pdf')
     #Compute Matrix Correlation and plot it
