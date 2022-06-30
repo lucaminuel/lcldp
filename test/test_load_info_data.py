@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 import numpy as np
-import data_analysis
+from data_analysis import load_info_data
 import pandas as pd
 
 PATH = r'test_data.csv'
@@ -12,7 +12,7 @@ class TestLoadInfoData(unittest.TestCase):
     Unit test for load_info_data module
     '''
     def test_load_info_data(self):
-        data = data_analysis.load_info_data(PATH)
+        data = load_info_data(PATH)
         #I evaluate the sum of some columns
         sum_loan = data['loan_amnt'].sum(axis=0)
         sum_mort_atc = data['mort_acc'].sum(axis=0)

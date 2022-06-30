@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest
-from data_analysis.plot_image import countpl as cpl
-from data_analysis.plot_image import barpl, histpl
-from data_analysis.plot_image import corr_matrix as crrm
+from data_analysis import barpl, histpl,countpl,corr_matrix
 import pandas as pd
 
 PATH = r'test_data.csv'
@@ -14,7 +12,7 @@ class TestLoadInfoData(unittest.TestCase):
     def test_countpl(self):
         data = pd.read_csv(PATH)
         #So that save is not in (0, 1), there is error
-        self.assertRaises(ValueError, cpl,column = 'loan_status' , data = data, save = 5)
+        self.assertRaises(ValueError, countpl,column = 'loan_status' , data = data, save = 5)
     
     def test_barpl(self):
         data = pd.read_csv(PATH)
@@ -31,7 +29,7 @@ class TestLoadInfoData(unittest.TestCase):
     def test_corr_matrix(self):
         data = pd.read_csv(PATH)
         #So that save is not in (0, 1), there is error
-        self.assertRaises(ValueError, crrm, data = data, save = 5)
+        self.assertRaises(ValueError, corr_matrix, data = data, save = 5)
     
 if __name__ == "__main__":
     unittest.main()
