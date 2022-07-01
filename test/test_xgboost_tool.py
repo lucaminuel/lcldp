@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest
-from machine_learning.xgboost_tool import basic_xgboost, hyper_xgboost
+from xgboost_tool import basic_xgboost , hyper_xgboost
 import pandas as pd
 
 PATH = r'test_data.csv'
