@@ -4,7 +4,7 @@ import numpy as np
 from data_analysis.load_info_data import load_info_data
 import pandas as pd
 
-PATH = r'test_data.csv'
+PATH = r'./test_data.csv'
 
 
 class TestLoadInfoData(unittest.TestCase):

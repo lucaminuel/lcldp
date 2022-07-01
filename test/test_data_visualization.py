@@ -3,7 +3,7 @@ import unittest
 from data_analysis.plot_image import barpl, histpl,countpl,corr_matrix
 import pandas as pd
 
-PATH = r'test_data.csv'
+PATH = r'./test_data.csv'
 
 class TestLoadInfoData(unittest.TestCase):
     '''
