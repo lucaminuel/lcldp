@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>machine_learning package &#8212; CMPEDA Project: Lending Club loan data prediction 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CMPEDA Project: Lending Club loan data prediction 1.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">machine_learning package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="machine-learning-package">
+<h1>machine_learning package<a class="headerlink" href="#machine-learning-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-machine_learning.neural_network_main">
+<span id="machine-learning-neural-network-main-module"></span><h2>machine_learning.neural_network_main module<a class="headerlink" href="#module-machine_learning.neural_network_main" title="Permalink to this heading">¶</a></h2>
+<p>In this module we use Neural Network tecnique to dataset analyzed in data_analysis modules</p>
+</section>
+<section id="module-machine_learning.neural_network_tool">
+<span id="machine-learning-neural-network-tool-module"></span><h2>machine_learning.neural_network_tool module<a class="headerlink" href="#module-machine_learning.neural_network_tool" title="Permalink to this heading">¶</a></h2>
+<p>In this module we build our Neural newtwork model and algorithm:
+1)Basic Model
+2)Dropout Model
+3)Diamond Model
+4) Hyperparameter tuning model
+The last one can require a lot of time (in our simulation it needed more than 2 hours).</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="machine_learning.neural_network_tool.basic_neural_network">
+<span class="sig-prename descclassname"><span class="pre">machine_learning.neural_network_tool.</span></span><span class="sig-name descname"><span class="pre">basic_neural_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/machine_learning/neural_network_tool.html#basic_neural_network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#machine_learning.neural_network_tool.basic_neural_network" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is basic form of neural netowork algorithm</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>DataFrame</em>) – dataframe you want to use the tecnique.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="machine_learning.neural_network_tool.build_DROPOUT_model">
+<span class="sig-prename descclassname"><span class="pre">machine_learning.neural_network_tool.</span></span><span class="sig-name descname"><span class="pre">build_DROPOUT_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/machine_learning/neural_network_tool.html#build_DROPOUT_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#machine_learning.neural_network_tool.build_DROPOUT_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Basic Neural Network with regularization Dropout</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X_train1</strong> (<em>array</em>) – X_train1.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>model.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>model</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="machine_learning.neural_network_tool.build_model">
+<span class="sig-prename descclassname"><span class="pre">machine_learning.neural_network_tool.</span></span><span class="sig-name descname"><span class="pre">build_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_res</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/machine_learning/neural_network_tool.html#build_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#machine_learning.neural_network_tool.build_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Basic model Neural Network</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X_res</strong> (<em>array</em>) – rebalanced X_train</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>model.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>model</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="machine_learning.neural_network_tool.build_model_diamond">
+<span class="sig-prename descclassname"><span class="pre">machine_learning.neural_network_tool.</span></span><span class="sig-name descname"><span class="pre">build_model_diamond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/machine_learning/neural_network_tool.html#build_model_diamond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#machine_learning.neural_network_tool.build_model_diamond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Diamond Neural Network</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X_train1</strong> (<em>array</em>) – X_train1.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>model.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>model</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="machine_learning.neural_network_tool.diamond_neural_network">
+<span class="sig-prename descclassname"><span class="pre">machine_learning.neural_network_tool.</span></span><span class="sig-name descname"><span class="pre">diamond_neural_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/machine_learning/neural_network_tool.html#diamond_neural_network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#machine_learning.neural_network_tool.diamond_neural_network" title="Permalink to this definition">¶</a></dt>
+<dd><p>This tool use dropout regolarization in our  diamond neural_network</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>DataFrame</em>) – dataframe you want to use the tecnique.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="machine_learning.neural_network_tool.dropout_neural_network">
+<span class="sig-prename descclassname"><span class="pre">machine_learning.neural_network_tool.</span></span><span class="sig-name descname"><span class="pre">dropout_neural_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/machine_learning/neural_network_tool.html#dropout_neural_network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#machine_learning.neural_network_tool.dropout_neural_network" title="Permalink to this definition">¶</a></dt>
+<dd><p>This tool use dropout regolarization in our neural_network</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>DataFrame</em>) – dataframe you want to use the tecnique.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="machine_learning.neural_network_tool.hyper_neural_network">
+<span class="sig-prename descclassname"><span class="pre">machine_learning.neural_network_tool.</span></span><span class="sig-name descname"><span class="pre">hyper_neural_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/machine_learning/neural_network_tool.html#hyper_neural_network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#machine_learning.neural_network_tool.hyper_neural_network" title="Permalink to this definition">¶</a></dt>
+<dd><p>This tool use create and test a neural network with hyperparameters tuned parameter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>DataFrame</em>) – dataframe you want to use the tecnique.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="machine_learning.neural_network_tool.test_neural_network">
+<span class="sig-prename descclassname"><span class="pre">machine_learning.neural_network_tool.</span></span><span class="sig-name descname"><span class="pre">test_neural_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/machine_learning/neural_network_tool.html#test_neural_network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#machine_learning.neural_network_tool.test_neural_network" title="Permalink to this definition">¶</a></dt>
+<dd><p>This tool analyzes overfitting of our neural network</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>DataFrame</em>) – dataframe you want to use the tecnique.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-machine_learning.xgboost_main">
+<span id="machine-learning-xgboost-main-module"></span><h2>machine_learning.xgboost_main module<a class="headerlink" href="#module-machine_learning.xgboost_main" title="Permalink to this heading">¶</a></h2>
+<p>In this module we use XGBoost Classifier tecnique.
+We will try before without optimazing the hyperparameter, than we will do it to improve
+our results.</p>
+</section>
+<section id="module-machine_learning.xgboost_tool">
+<span id="machine-learning-xgboost-tool-module"></span><h2>machine_learning.xgboost_tool module<a class="headerlink" href="#module-machine_learning.xgboost_tool" title="Permalink to this heading">¶</a></h2>
+<p>In this module we import function for XGBoost.
+We can choose for each module if rebalance the data.
+The 2 modules are:
+1)baisc_xgboost: symple XGBoost algorithm
+2)hyper_xgboost: introduce hyperparameter tuning
+Hyperprameter tuning could require some time (in our simulation it needed more or less 1 hour).</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="machine_learning.xgboost_tool.basic_xgboost">
+<span class="sig-prename descclassname"><span class="pre">machine_learning.xgboost_tool.</span></span><span class="sig-name descname"><span class="pre">basic_xgboost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rebalance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/machine_learning/xgboost_tool.html#basic_xgboost"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#machine_learning.xgboost_tool.basic_xgboost" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is basic form of XG Boost. If you want to rebalance the data: ‘rebalance’ = 1
+if you don’t ‘’rebalance’ = 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>DataFrame</em>) – dataframe you want to use the tecnique.</p></li>
+<li><p><strong>rebalance</strong> (<em>int</em><em>, </em><em>optional</em>) – it can be 1 (if you wanto to rebalance your data) or 0 (if you don’t).
+The default is 1.</p></li>
+<li><p><strong>save</strong> (<em>int</em><em>, </em><em>optional</em>) – it can be 1 (if you want to save) or 0 (if you don’t). The default is 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – rebalance and save must be 0 or 1.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="machine_learning.xgboost_tool.hyper_xgboost">
+<span class="sig-prename descclassname"><span class="pre">machine_learning.xgboost_tool.</span></span><span class="sig-name descname"><span class="pre">hyper_xgboost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rebalance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/machine_learning/xgboost_tool.html#hyper_xgboost"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#machine_learning.xgboost_tool.hyper_xgboost" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is hyperparameter form of XG Boost. If you want to rebalance the data: ‘rebalance’ = 1
+if you don’t ‘’rebalance’ = 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>DataFrame</em>) – dataframe you want to use the tecnique.</p></li>
+<li><p><strong>rebalance</strong> (<em>int</em><em>, </em><em>optional</em>) – it can be 1 (if you wanto to rebalance your data) or 0 (if you don’t).
+The default is 1.</p></li>
+<li><p><strong>save</strong> (<em>int</em><em>, </em><em>optional</em>) – it can be 1 (if you want to save) or 0 (if you don’t). The default is 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – rebalance and save must be 0 or 1.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-machine_learning">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-machine_learning" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">machine_learning package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-machine_learning.neural_network_main">machine_learning.neural_network_main module</a></li>
+<li><a class="reference internal" href="#module-machine_learning.neural_network_tool">machine_learning.neural_network_tool module</a></li>
+<li><a class="reference internal" href="#module-machine_learning.xgboost_main">machine_learning.xgboost_main module</a></li>
+<li><a class="reference internal" href="#module-machine_learning.xgboost_tool">machine_learning.xgboost_tool module</a></li>
+<li><a class="reference internal" href="#module-machine_learning">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/machine_learning.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CMPEDA Project: Lending Club loan data prediction 1.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">machine_learning package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, Manuel Luci, Andrea Dell&#39;Abate.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+    </div>
+  </body>
+</html>

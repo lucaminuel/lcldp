@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>machine_learning.xgboost_tool &#8212; CMPEDA Project: Lending Club loan data prediction 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">CMPEDA Project: Lending Club loan data prediction 1.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">machine_learning.xgboost_tool</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for machine_learning.xgboost_tool</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1">#pylint: disable=invalid-name</span>
+<span class="c1">#pylint: disable=too-many-locals</span>
+<span class="c1">#pylint: disable=consider-using-f-string</span>
+<span class="c1">#pylint: disable=line-too-long</span>
+<span class="c1">#pylint: disable=too-many-statements</span>
+<span class="c1"># Copyright 2022 Manuel Luci-Andrea Dell&#39;Abate</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of CMEPDA Project: Lending Club loan data prediction</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software; you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation; either version 2 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program; if not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">In this module we import function for XGBoost.</span>
+<span class="sd">We can choose for each module if rebalance the data.</span>
+<span class="sd">The 2 modules are:</span>
+<span class="sd">1)baisc_xgboost: symple XGBoost algorithm</span>
+<span class="sd">2)hyper_xgboost: introduce hyperparameter tuning</span>
+<span class="sd">Hyperprameter tuning could require some time (in our simulation it needed more or less 1 hour).</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span><span class="n">GridSearchCV</span>
+<span class="kn">from</span> <span class="nn">imblearn.over_sampling</span> <span class="kn">import</span> <span class="n">SMOTE</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+
+<span class="n">SEED</span> <span class="o">=</span> <span class="mi">42</span>
+
+<div class="viewcode-block" id="basic_xgboost"><a class="viewcode-back" href="../../machine_learning.html#machine_learning.xgboost_tool.basic_xgboost">[docs]</a><span class="k">def</span> <span class="nf">basic_xgboost</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">rebalance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">save</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    This is basic form of XG Boost. If you want to rebalance the data: &#39;rebalance&#39; = 1</span>
+<span class="sd">    if you don&#39;t &#39;&#39;rebalance&#39; = 0</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : DataFrame</span>
+<span class="sd">        dataframe you want to use the tecnique.</span>
+<span class="sd">    rebalance : int, optional</span>
+<span class="sd">        it can be 1 (if you wanto to rebalance your data) or 0 (if you don&#39;t).</span>
+<span class="sd">        The default is 1.</span>
+<span class="sd">    save : int, optional</span>
+<span class="sd">        it can be 1 (if you want to save) or 0 (if you don&#39;t). The default is 0.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        rebalance and save must be 0 or 1.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None.</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">save</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;save must be 1 or 0&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">rebalance</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;rebalance must be 1 or 0&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Preparing train and test...&#39;</span><span class="p">)</span>
+    <span class="c1">#dividing the dataset in training X and Y</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;loan_repaid&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;loan_repaid&#39;</span><span class="p">]</span>
+    <span class="c1">#Split data in train and test</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> \
+                                                        <span class="n">random_state</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Train and test preparation successful!&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">rebalance</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">:</span>
+        <span class="c1">#Using SMOTE to rebalance the unbalance class &#39;loan repaired&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Rebalancing data...&#39;</span><span class="p">)</span>
+        <span class="n">sm</span> <span class="o">=</span> <span class="n">SMOTE</span><span class="p">(</span><span class="n">random_state</span> <span class="o">=</span> <span class="n">SEED</span><span class="p">)</span>
+        <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Resampled dataset shape </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">Counter</span><span class="p">(</span><span class="n">y_train</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Starting basic XGBoost...&#39;</span><span class="p">)</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> \
+                                                      <span class="n">random_state</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">model_xgb</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span><span class="n">seed</span> <span class="o">=</span> <span class="n">SEED</span><span class="p">,</span> <span class="n">early_stopping_rounds</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">eval_metric</span> <span class="o">=</span><span class="s1">&#39;aucpr&#39;</span><span class="p">)</span>
+    <span class="n">xgb</span> <span class="o">=</span> <span class="n">model_xgb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span><span class="kc">True</span> <span class="p">,</span> <span class="n">eval_set</span> <span class="o">=</span> <span class="p">[(</span><span class="n">X_val</span><span class="p">,</span><span class="n">y_val</span><span class="p">)])</span>
+    <span class="c1">#array of predicted class</span>
+    <span class="n">y_pred_xgb</span> <span class="o">=</span> <span class="n">model_xgb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;XG boost done! Printing results:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy XGB:</span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Precision XGB:</span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Recall XGB:</span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;F1 Score XGB:</span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="c1">#plotting the confusion matrix</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+    <span class="n">metrics</span><span class="o">.</span><span class="n">plot_confusion_matrix</span><span class="p">(</span><span class="n">xgb</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">values_format</span><span class="o">=</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> \
+                                  <span class="n">display_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Charged Off&#39;</span><span class="p">,</span> <span class="s1">&#39;Fully Paid&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">rebalance</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">out_name</span><span class="o">=</span><span class="s1">&#39;basic_XGBoost.txt&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">out_name</span><span class="o">=</span><span class="s1">&#39;basic_balanced_XGBoost.txt&#39;</span>
+    <span class="c1">#Save results in  folder Results</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="s1">&#39;Results&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Creating Folder Results...</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">&#39;Results&#39;</span><span class="p">)</span>
+    <span class="n">path_results</span> <span class="o">=</span> <span class="s1">&#39;./Results&#39;</span>
+    <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_results</span><span class="p">,</span> <span class="n">out_name</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy XGB:</span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">file</span> <span class="o">=</span> <span class="n">file</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Precision XGB:</span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">file</span> <span class="o">=</span> <span class="n">file</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Recall XGB:</span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">file</span> <span class="o">=</span> <span class="n">file</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;F1 Score XGB:</span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">file</span> <span class="o">=</span> <span class="n">file</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">save</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1">#Create folder Figure if it does not exist</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="s1">&#39;Figures&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Creating Folder Figures...</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">&#39;Figures&#39;</span><span class="p">)</span>
+        <span class="n">script_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+        <span class="n">results_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">script_dir</span><span class="p">,</span> <span class="s1">&#39;Figures/&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">rebalance</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;(1)basic_XGBoost.pdf&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">name</span><span class="o">=</span> <span class="s1">&#39;(2)basic_balanced_XGBoost.pdf&#39;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">results_dir</span> <span class="o">+</span> <span class="n">name</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;pdf&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="hyper_xgboost"><a class="viewcode-back" href="../../machine_learning.html#machine_learning.xgboost_tool.hyper_xgboost">[docs]</a><span class="k">def</span> <span class="nf">hyper_xgboost</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">rebalance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">save</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    This is hyperparameter form of XG Boost. If you want to rebalance the data: &#39;rebalance&#39; = 1</span>
+<span class="sd">    if you don&#39;t &#39;&#39;rebalance&#39; = 0</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : DataFrame</span>
+<span class="sd">        dataframe you want to use the tecnique.</span>
+<span class="sd">    rebalance : int, optional</span>
+<span class="sd">        it can be 1 (if you wanto to rebalance your data) or 0 (if you don&#39;t).</span>
+<span class="sd">        The default is 1.</span>
+<span class="sd">    save : int, optional</span>
+<span class="sd">        it can be 1 (if you want to save) or 0 (if you don&#39;t). The default is 0.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        rebalance and save must be 0 or 1.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None.</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">save</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;save must be 1 or 0&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">rebalance</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;rebalance must be 1 or 0&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Preparing train and test...&#39;</span><span class="p">)</span>
+    <span class="c1">#dividing the dataset in training X and Y</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;loan_repaid&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;loan_repaid&#39;</span><span class="p">]</span>
+    <span class="c1">#Split data in train and test</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> \
+                                                        <span class="n">random_state</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Train and test preparation successful!&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">rebalance</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">:</span>
+        <span class="c1">#Using SMOTE to rebalance the unbalance class &#39;loan repaired&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Rebalancing data...&#39;</span><span class="p">)</span>
+        <span class="n">sm</span> <span class="o">=</span> <span class="n">SMOTE</span><span class="p">(</span><span class="n">random_state</span> <span class="o">=</span> <span class="n">SEED</span><span class="p">)</span>
+        <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Resampled dataset shape </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">Counter</span><span class="p">(</span><span class="n">y_train</span><span class="p">))</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> \
+                                                      <span class="n">random_state</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="c1">#Optimaze the hyperparameter</span>
+    <span class="c1">#ROUND : paramters of this round has been optained by other Rounds that we runned before,</span>
+    <span class="c1">#this round is the last one we evaluated in our test</span>
+    <span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;max_depth&#39;</span><span class="p">:[</span><span class="mi">4</span><span class="p">],</span>
+        <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">],</span>
+        <span class="s1">&#39;reg_lambda&#39;</span><span class="p">:[</span><span class="mf">10.0</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
+        <span class="s1">&#39;early_stopping_rounds&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+        <span class="s1">&#39;eval_metric&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;auc&#39;</span><span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">#Searching the best parameters</span>
+    <span class="n">optimal_params</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">XGBClassifier</span><span class="p">(</span><span class="n">seed</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="n">subsamaple</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">colsample_bytree</span><span class="o">=</span> <span class="mf">0.5</span><span class="p">),</span>
+                                  <span class="n">param_grid</span> <span class="o">=</span> <span class="n">param_grid</span><span class="p">,</span>
+                                  <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;roc_auc&#39;</span><span class="p">,</span>
+                                  <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                                  <span class="n">cv</span> <span class="o">=</span> <span class="mi">5</span>
+                                 <span class="p">)</span>
+    <span class="n">optimal_params</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span>
+                       <span class="n">y_train</span><span class="p">,</span>
+                       <span class="n">eval_set</span><span class="o">=</span><span class="p">[(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)],</span>
+                       <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">optimal_params</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+
+    <span class="c1">#Construct the XGBoost classifier based on the best hyperparameters found</span>
+    <span class="n">model_xgb_hpt</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span><span class="n">seed</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span>
+                                  <span class="n">gamma</span> <span class="o">=</span> <span class="n">optimal_params</span><span class="o">.</span><span class="n">best_params_</span><span class="p">[</span><span class="s1">&#39;gamma&#39;</span><span class="p">],</span>
+                                  <span class="n">learning_rate</span> <span class="o">=</span> <span class="n">optimal_params</span><span class="o">.</span><span class="n">best_params_</span><span class="p">[</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">],</span>
+                                  <span class="n">max_depth</span> <span class="o">=</span> <span class="n">optimal_params</span><span class="o">.</span><span class="n">best_params_</span><span class="p">[</span><span class="s1">&#39;max_depth&#39;</span><span class="p">],</span>
+                                  <span class="n">reg_lambda</span> <span class="o">=</span> <span class="n">optimal_params</span><span class="o">.</span><span class="n">best_params_</span><span class="p">[</span><span class="s1">&#39;reg_lambda&#39;</span><span class="p">],</span>
+                                  <span class="n">early_stopping_rounds</span> <span class="o">=</span> <span class="n">optimal_params</span><span class="o">.</span><span class="n">best_params_</span><span class="p">[</span><span class="s1">&#39;early_stopping_rounds&#39;</span><span class="p">],</span>
+                                  <span class="n">eval_metric</span> <span class="o">=</span> <span class="n">optimal_params</span><span class="o">.</span><span class="n">best_params_</span><span class="p">[</span><span class="s1">&#39;eval_metric&#39;</span><span class="p">])</span>
+    <span class="n">xgb_hpt</span> <span class="o">=</span> <span class="n">model_xgb_hpt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span><span class="kc">True</span> <span class="p">,</span> <span class="n">eval_set</span> <span class="o">=</span> <span class="p">[(</span><span class="n">X_val</span><span class="p">,</span><span class="n">y_val</span><span class="p">)])</span>
+    <span class="n">y_pred_xgb</span> <span class="o">=</span> <span class="n">model_xgb_hpt</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    <span class="c1">#plotting confusion matrix</span>
+    <span class="n">metrics</span><span class="o">.</span><span class="n">plot_confusion_matrix</span><span class="p">(</span><span class="n">xgb_hpt</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">values_format</span><span class="o">=</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> \
+                                  <span class="n">display_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Charged Off&#39;</span><span class="p">,</span> <span class="s1">&#39;Fully Paid&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">rebalance</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">out_name</span><span class="o">=</span><span class="s1">&#39;hyper_XGBoost.txt&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">out_name</span><span class="o">=</span><span class="s1">&#39;hyper_balanced_XGBoost.txt&#39;</span>
+    <span class="c1">#Save results in  folder Results</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="s1">&#39;Results&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Creating Folder Results...</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">&#39;Results&#39;</span><span class="p">)</span>
+    <span class="n">path_results</span> <span class="o">=</span> <span class="s1">&#39;./Results&#39;</span>
+    <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_results</span><span class="p">,</span> <span class="n">out_name</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy XGB:</span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">file</span> <span class="o">=</span> <span class="n">file</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Precision XGB:</span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">file</span> <span class="o">=</span> <span class="n">file</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Recall XGB:</span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">file</span> <span class="o">=</span> <span class="n">file</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;F1 Score XGB:</span><span class="si">{</span><span class="n">metrics</span><span class="o">.</span><span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">file</span> <span class="o">=</span> <span class="n">file</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">save</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1">#Create folder Figure if it does not exist</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="s1">&#39;Figures&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Creating Folder Figures...</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">&#39;Figures&#39;</span><span class="p">)</span>
+        <span class="n">script_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+        <span class="n">results_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">script_dir</span><span class="p">,</span> <span class="s1">&#39;Figures/&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">rebalance</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;(3)hyper_XGBoost.pdf&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">name</span><span class="o">=</span> <span class="s1">&#39;(4)hyper_balanced_XGBoost.pdf&#39;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">results_dir</span> <span class="o">+</span> <span class="n">name</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;pdf&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">CMPEDA Project: Lending Club loan data prediction 1.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">machine_learning.xgboost_tool</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, Manuel Luci, Andrea Dell&#39;Abate.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+    </div>
+  </body>
+</html>
