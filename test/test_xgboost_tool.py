@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
+import os
 import unittest
 from machine_learning.xgboost_tool import basic_xgboost , hyper_xgboost
 import pandas as pd
-
-PATH = r'./test_data.csv'
+myfile = 'test_data.csv'
+mydir = os.getcwd()
+training_images_labels_path = os.path.join(mydir, myfile)
+PATH = os.path.join(mydir, myfile)
 
 class TestXgbTool(unittest.TestCase):
     '''

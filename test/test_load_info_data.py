@@ -1,10 +1,15 @@
 # -*- coding: utf-8 -*-
+import os 
 import unittest
 import numpy as np
 from data_analysis.load_info_data import load_info_data
 import pandas as pd
 
-PATH = r'./test_data.csv'
+myfile = 'test_data.csv'
+mydir = os.getcwd()
+training_images_labels_path = os.path.join(mydir, myfile)
+PATH = os.path.join(mydir, myfile)
+
 
 
 class TestLoadInfoData(unittest.TestCase):
