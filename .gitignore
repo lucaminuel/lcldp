@@ -1,3 +1,5 @@
 #ignore file
-docs/build/
+docs/_build/
 docs/source/_templates/
+machine_learning/__pycache__/
+data_analysis/__pycache__/
