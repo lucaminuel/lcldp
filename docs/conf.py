@@ -13,22 +13,20 @@
 import os
 import sys
 package_root =  os.path.abspath('..')
-package_name1 = 'lcldp\machine_learning'
-package_name2 = 'lcldp\data_analysis'
+package_name1 = 'lcldp\data_analysis'
+package_name2 = 'lcldp\machine_learning'
 sys.path.insert(0, package_root)
 sys.path.insert(0, os.path.join(package_root, package_name1))
 sys.path.insert(0, os.path.join(package_root, package_name2))
 
 
 
+
 # -- Project information -----------------------------------------------------
 
-project = 'CMPEDA Project: Lending Club loan data prediction'
+project = 'lcldp'
 copyright = "2022, Manuel Luci, Andrea Dell'Abate"
 author = "Manuel Luci, Andrea Dell'Abate"
-
-# The full version, including alpha/beta/rc tags
-release = '1.0.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -39,8 +37,7 @@ release = '1.0.0'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
-    'sphinx.ext.viewcode',
-    
+    'sphinx.ext.viewcode',    
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -58,7 +55,6 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # a list of builtin themes.
 #
 html_theme = 'default'
-
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
