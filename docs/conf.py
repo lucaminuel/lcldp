@@ -9,18 +9,21 @@
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-
+#
 import os
 import sys
-package_name = 'lcldp'
-package_root = os.path.abspath('..')
+package_root =  os.path.abspath('..')
+package_name1 = 'machine_learning'
+package_name2 = 'data_analysis'
 sys.path.insert(0, package_root)
-sys.path.insert(0, os.path.join(package_root, package_name))
+sys.path.insert(0, os.path.join(package_root, package_name1))
+sys.path.insert(0, os.path.join(package_root, package_name2))
+
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'lcldp'
+project = 'CMPEDA Project: Lending Club loan data prediction'
 copyright = "2022, Manuel Luci, Andrea Dell'Abate"
 author = "Manuel Luci, Andrea Dell'Abate"
 
@@ -36,10 +39,9 @@ release = '1.0.0'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
-    'sphinx.ext.viewcode'
+    'sphinx.ext.viewcode',
+    
 ]
-
-
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -56,6 +58,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # a list of builtin themes.
 #
 html_theme = 'default'
+
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

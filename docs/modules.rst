@@ -1,8 +1,10 @@
-lcldp
-=====
+machine_learning
+================
 
 .. toctree::
    :maxdepth: 4
 
-   data_analysis
-   machine_learning
+   neural_network_main
+   neural_network_tool
+   xgboost_main
+   xgboost_tool

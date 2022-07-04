@@ -1,14 +1,19 @@
-.. lcldp documentation master file, created by
-   sphinx-quickstart on Mon Jul  4 17:16:43 2022.
+.. CMPEDA Project: Lending Club loan data prediction documentation master file, created by
+   sphinx-quickstart on Wed Jun 29 21:56:40 2022.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to lcldp's documentation!
-=================================
+Welcome to CMPEDA Project: Lending Club loan data prediction's documentation!
+=============================================================================
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+.. include:: data_plot_analysis.rst
+.. include:: load_info_data.rst
+.. include:: plot_image.rst
+.. include:: data_processing.rst
+.. include:: neural_network_main.rst
+.. include:: neural_network_tool.rst
+.. include:: xgboost_main.rst
+.. include:: xgboost_tool.rst
 
 
 
