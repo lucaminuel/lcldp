@@ -22,8 +22,10 @@
 \usepackage{scalerel}
 \usepackage{mathrsfs}
 \usepackage{tikz}
+\usepackage{url}
 \author{Manuel Luci, Andrea Dell'Abate}
 \title{CMPEDA Project: Lending Club loan data prediction}
+\date{}
 \subtitle{A Finance Predictive Model based on DNN and XGboost}
 \begin{document}
 \maketitle
@@ -39,13 +41,14 @@ Two types of risks are associated with the bank's decision:
 \end{itemize}
 Our aim is to develop the best supervised machine learning model capable to identify which borrowers will payoff their loans.\\
 We’ll try to do this binary classification task using Deep Neural Network and X-G
-boost models.
+boost models.\\
+Link dataset:\url{https://www.kaggle.com/code/faressayah/lending-club-loan-defaulters-prediction/data?select=lending_club_loan_two.csv}
 \section{Preprocessing (module: data\_analysis )}
 We divided the preprocessing part into two phases: 
 \begin{itemize}
 	\item In the first one we developed the statistical part of the dataset analyzing how all the features were distributed and how they were correlated with each other.
-	\item In the second part we modified the dataset for our purposes: the missing values were treated (eliminating or replacing them as appropriate) eliminated the variables that were correlated with each other and chose those that were most useful for our machine learning task.\\
-	Finally we replaced all categorical variables with numeric variables and performed the one hot encoder by means of the dummy module (dummy data).\\
+	\item In the second part we modified the dataset for our purposes: the missing values were treated (eliminating or replacing them as appropriate), we eliminated the variables that were highly correlated with each other and  we chose those that were most useful for our machine learning task.\\
+	Finally we replaced all categorical variables with numeric ones and we performed the one hot encoder by means of the dummy module (dummy data).\\
 \end{itemize}
 Below we report some usefull graphs for our analysis:
 	\begin{figure}[h!]
@@ -88,8 +91,8 @@ For instance we tried to optimaze the hyperparameters also doing Cross Validatio
 	\includegraphics[scale=0.8]{figures/(6)hyper_balanced_XGBoost.pdf}
 	\caption{Confusion matrix XG-Boost with hyperparameters}
 \end{figure}
-\subsection{Deep Neural Netowrk}
-For this algorithm we used all the features and we proceeded in several steps.\\
+\subsection{Deep Neural Network}
+For this model we proceed in several steps.\\
 We built an “inverted pyramid” model and also here to avoid overfitting we used a validation set and we implemented a ’Early Stopping’ callback. \\
 We added other layers using Dropout regolarization and compared the two models.\\
 The regolarization gave us the best results so we procedeed always considering Dropout.\\
@@ -135,5 +138,5 @@ In this table we summarize the results of our model:
 As we can see we have obtained great results in each metrics but f1 score.\\
 On confusion matrix we have obtained a great prediction of the majority class $\sim$ 90 $\%$ in every model but a worse one on minority $\sim$ 54 $\%$.
 This not so optimal classification is due to the beginning unbalanced of our dataset.\\
-From our model, DNN predicts better than XGBoost
+From our model, DNN predicts better than XGBoost.
 \end{document}

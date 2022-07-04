@@ -4,3 +4,8 @@ docs/source/_templates/
 machine_learning/__pycache__/
 data_analysis/__pycache__/
 test/__pycache__/
+text/abstract.aut
+text/abstract.log
+text/abstract.pdf
+text/abstract.synctex.gz
+text/abstract.tex

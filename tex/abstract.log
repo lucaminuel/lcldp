@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.11)  30 JUN 2022 17:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.11)  4 JUL 2022 15:34
 entering extended mode
 **./abstract.tex
 (abstract.tex
@@ -933,28 +933,32 @@ File: pgfmodulematrix.code.tex 2020/12/27 v3.1.8b (3.1.8b)
 (D:\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarytopaths.code
 .tex
 File: tikzlibrarytopaths.code.tex 2020/12/27 v3.1.8b (3.1.8b)
-)))
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 28
+))) (D:\MiKTeX\tex/latex/url\url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 30
 .
  (D:\MiKTeX\tex/latex/lm\t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) (abstract.aux)
+)
+(abstract.aux)
 \openout1 = `abstract.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -990,8 +994,8 @@ LaTeX Font Info:    ... okay on input line 28.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \degres on input line 28.
-LaTeX Info: Redefining \up on input line 28.
+LaTeX Info: Redefining \degres on input line 30.
+LaTeX Info: Redefining \up on input line 30.
 (D:\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count330
@@ -1019,165 +1023,170 @@ File: translations-basic-dictionary-french.trsl (french translation file `trans
 lations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `french'. on input line 28.
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 2
-8.
+or `french'. on input line 30.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 3
+0.
  (D:\MiKTeX\tex/latex/lm\ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
-8.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3
+0.
  (D:\MiKTeX\tex/latex/lm\omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-28.
+30.
 
 (D:\MiKTeX\tex/latex/lm\omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-28.
+30.
  (D:\MiKTeX\tex/latex/lm\omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 28.
+(Font)              <10.95> on input line 30.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 28.
+(Font)              <8> on input line 30.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 28.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 28.
+(Font)              <6> on input line 30.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 30.
 
 
 (D:\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 28.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 30.
 
  (D:\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 28
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 30
 .
 
 (D:\MiKTeX\tex/latex/jknappen\ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
 LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 
-28.
+30.
  (D:\MiKTeX\tex/latex/lm\ot1lmss.fd
 File: ot1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 
-28.
+30.
 
 (D:\MiKTeX\tex/latex/lm\ot1lmtt.fd
 File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for T1+lmss on input line 3
-0.
+2.
  (D:\MiKTeX\tex/latex/lm\t1lmss.fd
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 30.
+(Font)              <14.4> on input line 32.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 30.
+(Font)              <10> on input line 32.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 30.
+(Font)              <7> on input line 32.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 4
+5.
 
-Underfull \hbox (badness 10000) in paragraph at lines 47--49
+(D:\MiKTeX\tex/latex/lm\t1lmtt.fd
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+Overfull \hbox (102.2887pt too wide) in paragraph at lines 42--46
+\T1/lmr/m/n/10.95 Link da-ta-set :$\T1/lmtt/m/n/10.95 https : / / www . kaggle 
+. com / code / faressayah / lending-[]club-[]loan-[]defaulters-[]prediction /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 50--52
 
  []
 
 <figures/(1)pf_vs_co.pdf, id=4, 1021.96178pt x 426.8773pt>
 File: figures/(1)pf_vs_co.pdf Graphic file (type pdf)
 <use figures/(1)pf_vs_co.pdf>
-Package pdftex.def Info: figures/(1)pf_vs_co.pdf  used on input line 53.
+Package pdftex.def Info: figures/(1)pf_vs_co.pdf  used on input line 56.
 (pdftex.def)             Requested size: 306.5909pt x 128.06418pt.
 <figures/(2)corr_matrix.pdf, id=5, 1226.67685pt x 659.50485pt>
 File: figures/(2)corr_matrix.pdf Graphic file (type pdf)
 <use figures/(2)corr_matrix.pdf>
-Package pdftex.def Info: figures/(2)corr_matrix.pdf  used on input line 58.
+Package pdftex.def Info: figures/(2)corr_matrix.pdf  used on input line 61.
 (pdftex.def)             Requested size: 368.0059pt x 197.85298pt.
 <figures/(3)verification_status_bar.pdf, id=6, 1274.64021pt x 484.92229pt>
 File: figures/(3)verification_status_bar.pdf Graphic file (type pdf)
 <use figures/(3)verification_status_bar.pdf>
 Package pdftex.def Info: figures/(3)verification_status_bar.pdf  used on input 
-line 63.
+line 66.
 (pdftex.def)             Requested size: 382.39502pt x 145.4778pt.
 <figures/(4)emp_lenght_bar.pdf, id=7, 1280.25494pt x 464.06311pt>
 File: figures/(4)emp_lenght_bar.pdf Graphic file (type pdf)
 <use figures/(4)emp_lenght_bar.pdf>
-Package pdftex.def Info: figures/(4)emp_lenght_bar.pdf  used on input line 68.
+Package pdftex.def Info: figures/(4)emp_lenght_bar.pdf  used on input line 71.
 (pdftex.def)             Requested size: 384.07945pt x 139.22pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
 [1
 
 
 {C:/Users/manue/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
-<figures/(5)basic_balanced_XGBoost.pdf, id=15, 380.71811pt x 263.16693pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<figures/(5)basic_balanced_XGBoost.pdf, id=16, 380.71811pt x 263.16693pt>
 File: figures/(5)basic_balanced_XGBoost.pdf Graphic file (type pdf)
 <use figures/(5)basic_balanced_XGBoost.pdf>
 Package pdftex.def Info: figures/(5)basic_balanced_XGBoost.pdf  used on input l
-ine 83.
+ine 86.
 (pdftex.def)             Requested size: 304.57489pt x 210.53383pt.
-<figures/(6)hyper_balanced_XGBoost.pdf, id=16, 380.71811pt x 263.16693pt>
+<figures/(6)hyper_balanced_XGBoost.pdf, id=17, 380.71811pt x 263.16693pt>
 File: figures/(6)hyper_balanced_XGBoost.pdf Graphic file (type pdf)
 <use figures/(6)hyper_balanced_XGBoost.pdf>
 Package pdftex.def Info: figures/(6)hyper_balanced_XGBoost.pdf  used on input l
-ine 88.
+ine 91.
 (pdftex.def)             Requested size: 304.57489pt x 210.53383pt.
- [2 <./figures/(1)pf_vs_co.pdf> <./figures/(2)corr_matrix.pdf>]
+[2 <./figures/(1)pf_vs_co.pdf> <./figures/(2)corr_matrix.pdf>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<figures/(7)confusion_matrix_basic_neural_network.pdf, id=90, 380.71811pt x 263
+<figures/(7)confusion_matrix_basic_neural_network.pdf, id=91, 380.71811pt x 263
 .16693pt>
 File: figures/(7)confusion_matrix_basic_neural_network.pdf Graphic file (type p
 df)
 <use figures/(7)confusion_matrix_basic_neural_network.pdf>
 Package pdftex.def Info: figures/(7)confusion_matrix_basic_neural_network.pdf  
-used on input line 101.
+used on input line 104.
 (pdftex.def)             Requested size: 304.57489pt x 210.53383pt.
-<figures/(8)confusion_matrix_dropout_neural_network.pdf, id=91, 380.71811pt x 2
+<figures/(8)confusion_matrix_dropout_neural_network.pdf, id=92, 380.71811pt x 2
 63.16693pt>
 File: figures/(8)confusion_matrix_dropout_neural_network.pdf Graphic file (type
  pdf)
 <use figures/(8)confusion_matrix_dropout_neural_network.pdf>
 Package pdftex.def Info: figures/(8)confusion_matrix_dropout_neural_network.pdf
-  used on input line 106.
+  used on input line 109.
 (pdftex.def)             Requested size: 304.57489pt x 210.53383pt.
-<figures/(9)confusion_matrix_dropout_diamond_neural_network.pdf, id=92, 380.718
+<figures/(9)confusion_matrix_dropout_diamond_neural_network.pdf, id=93, 380.718
 11pt x 263.16693pt>
 File: figures/(9)confusion_matrix_dropout_diamond_neural_network.pdf Graphic fi
 le (type pdf)
 <use figures/(9)confusion_matrix_dropout_diamond_neural_network.pdf>
 Package pdftex.def Info: figures/(9)confusion_matrix_dropout_diamond_neural_net
-work.pdf  used on input line 111.
+work.pdf  used on input line 114.
 (pdftex.def)             Requested size: 304.57489pt x 210.53383pt.
-<figures/(10)confusion_matrix_hyper_neural_network.pdf, id=93, 380.71811pt x 26
+<figures/(10)confusion_matrix_hyper_neural_network.pdf, id=94, 380.71811pt x 26
 3.16693pt>
 File: figures/(10)confusion_matrix_hyper_neural_network.pdf Graphic file (type 
 pdf)
 <use figures/(10)confusion_matrix_hyper_neural_network.pdf>
 Package pdftex.def Info: figures/(10)confusion_matrix_hyper_neural_network.pdf 
- used on input line 116.
+ used on input line 119.
 (pdftex.def)             Requested size: 304.57489pt x 210.53383pt.
 [3 <./figures/(3)verification_status_bar.pdf> <./figures/(4)emp_lenght_bar.pdf>
 ] [4 <./figures/(5)basic_balanced_XGBoost.pdf> <./figures/(6)hyper_balanced_XGB
@@ -1193,11 +1202,11 @@ sion_matrix_dropout_neural_network.pdf>] [6 <./figures/(9)confusion_matrix_drop
 out_diamond_neural_network.pdf> <./figures/(10)confusion_matrix_hyper_neural_ne
 twork.pdf>] [7] (abstract.aux) ) 
 Here is how much of TeX's memory you used:
- 23611 strings out of 479173
- 490460 string characters out of 2870757
- 876917 words of memory out of 3000000
- 40771 multiletter control sequences out of 15000+600000
- 476603 words of font info for 88 fonts, out of 8000000 for 9000
+ 23723 strings out of 479173
+ 491881 string characters out of 2870757
+ 878003 words of memory out of 3000000
+ 40875 multiletter control sequences out of 15000+600000
+ 476922 words of font info for 89 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,8n,110p,10629b,424s stack positions out of 5000i,500n,10000p,200000b,80000s
 {D:/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{D:
@@ -1205,10 +1214,11 @@ Here is how much of TeX's memory you used:
 c}{D:/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}<D:/MiKTeX/fonts/type1/public/lm/lmcs
 c10.pfb><D:/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><D:/MiKTeX/fonts/type1/publ
 ic/lm/lmr10.pfb><D:/MiKTeX/fonts/type1/public/lm/lmr12.pfb><D:/MiKTeX/fonts/typ
-e1/public/lm/lmssbx10.pfb><D:/MiKTeX/fonts/type1/public/lm/lmsy10.pfb>
-Output written on abstract.pdf (7 pages, 269270 bytes).
+e1/public/lm/lmssbx10.pfb><D:/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><D:/MiKTe
+X/fonts/type1/public/lm/lmtt10.pfb>
+Output written on abstract.pdf (7 pages, 293119 bytes).
 PDF statistics:
- 430 PDF objects out of 1000 (max. 8388607)
+ 434 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  63 words of extra memory for PDF output out of 10000 (max. 10000000)
 
