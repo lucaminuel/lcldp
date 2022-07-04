@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-
-import os
 import unittest
-from data_analysis.plot_image import barpl, histpl,countpl,corr_matrix
+from lcldp.data_analysis.plot_image import barpl, histpl,countpl,corr_matrix
 import pandas as pd
-myfile = 'test_data.csv'
-mydir = os.getcwd()
-training_images_labels_path = os.path.join(mydir, myfile)
-PATH = os.path.join(mydir, myfile)
+PATH = 'test/test_data.csv'
 
 class TestLoadInfoData(unittest.TestCase):
     '''

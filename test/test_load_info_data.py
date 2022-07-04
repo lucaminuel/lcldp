@@ -1,14 +1,8 @@
 # -*- coding: utf-8 -*-
-import os 
 import unittest
 import numpy as np
-from data_analysis.load_info_data import load_info_data
-import pandas as pd
-
-myfile = 'test_data.csv'
-mydir = os.getcwd()
-training_images_labels_path = os.path.join(mydir, myfile)
-PATH = os.path.join(mydir, myfile)
+from lcldp.data_analysis.load_info_data import load_info_data
+PATH = 'test/test_data.csv'
 
 
 
