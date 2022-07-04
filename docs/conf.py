@@ -13,8 +13,8 @@
 import os
 import sys
 package_root =  os.path.abspath('..')
-package_name1 = 'machine_learning'
-package_name2 = 'data_analysis'
+package_name1 = 'lcldp\machine_learning'
+package_name2 = 'lcldp\data_analysis'
 sys.path.insert(0, package_root)
 sys.path.insert(0, os.path.join(package_root, package_name1))
 sys.path.insert(0, os.path.join(package_root, package_name2))
